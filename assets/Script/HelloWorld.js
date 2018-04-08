@@ -1,3 +1,5 @@
+var Helper = require("./Helper");
+
 cc.Class({
     extends: cc.Component,
 
@@ -14,7 +16,12 @@ cc.Class({
     onLoad: function () {
         this.label.string = this.text;
     },
-
+    start () {
+        // Helper.gameRoot.showTip("kkkkk");
+    },
+    onBtn () {
+        Helper.gameRoot.showTip("kkkkk");
+    },
     // called every frame
     update: function (dt) {
 

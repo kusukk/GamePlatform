@@ -8,10 +8,6 @@
 //  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
 
-var HttpNet = require("./HttpNet");
-// var Helper = require("../Helper");
-var Helper = require("../Helper").Helper;
-
 cc.Class({
     extends: cc.Component,
 
@@ -31,34 +27,64 @@ cc.Class({
         //         this._bar = value;
         //     }
         // },
+        maskPanel: cc.Node,
+        message : cc.Label,
+        btn1: cc.Button,
+        btn2 : cc.Button,
+        tipPanel : cc.Node,
+        tip : cc.Label,
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     // onLoad () {},
 
+
+
     start () {
 
     },
 
-    onBtn1 () {
-        // cc.director.loadScene("test");
-        Helper.enterTest();
+    showMaskMessage(message, btn1, btn2) {
+        this.message.string = message;
+        if(!this.maskPanel.active){
+            this.maskPanel.active = true;
+        }
+        if(btn1){
+            this.btn1.active = true;
+            this.btn1.getComponent(cc.Label).string = btn1.label;
+            this.btn1.once(cc.Node.EventType.TOUCH_END, function(){
+                this.hideMaskMessage();
+                if(btn1.cb){
+                    btn1.cb();
+                }
+            },btn1.target);
+        }
+        else {
+            this.btn1.active = false;
+        }
+        if(btn2){
+            this.btn2.active = true;
+            this.btn2.getComponent(cc.Label).string = btn2.label;
+            this.btn2.once(cc.Node.EventType.TOUCH_END, function(){
+                this.hideMaskMessage();
+                if(btn2.cb){
+                    btn2.cb();
+                }
+            },btn2.target);
+        }
+        else {
+            this.btn2.active = false;
+        }
     },
-    onBtn2 () {
-        var fn = function(ret){
 
-        }
-        console.log("bbbbbbbbb");
-        HttpNet.sendRequest("c=settings&m=get_url",{},fn);
+    hideMaskMessage() {
+        this.maskPanel.active = false;
     },
-    onBtn3 () {
-        console.log("cccccccc");
-        var fn = function(ret){
-            
-        }
-        HttpNet.sendRequest("c=settings&m=static_table_info",{table_name:"_basic_art"},fn);
+
+    showTip(tip){
+        this.tip.string = tip;
+        this.tipPanel.getComponent(cc.Animation).play();
     },
-        
     // update (dt) {},
 });

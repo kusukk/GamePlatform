@@ -7,6 +7,9 @@
 // Learn life-cycle callbacks:
 //  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
+// var Helper = require("./Helper");
+var Helper = require("./Helper").Helper;
+var GameRoot = require("./GameRoot");
 
 cc.Class({
     extends: cc.Component,
@@ -28,11 +31,15 @@ cc.Class({
         //     }
         // },
         tipLabel: cc.Label,
+        gameRoot: cc.Node,
     },
 
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {},
+    onLoad () {
+        cc.game.addPersistRootNode(this.gameRoot);
+        Helper.gameRoot = this.gameRoot.getComponent(GameRoot);
+    },
 
     start () {
         var tip = "努力加载中...";
@@ -45,7 +52,7 @@ cc.Class({
             }else{
                 this.tipLabel.string = tip.substring(0,i);
             }
-        },0.3);
+        },0.1);
     },
 
     onLoadSuccess: function(){

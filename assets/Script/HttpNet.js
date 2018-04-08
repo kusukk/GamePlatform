@@ -8,7 +8,7 @@
 //  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
 
-var URL  = "http://192.168.0.197/soosoogoo_caromag/index.php?";
+var URL  = "http://192.168.0.1/server_test/index.php?";
 var HttpNet = cc.Class({
     extends: cc.Component,
 

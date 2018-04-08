@@ -8,8 +8,23 @@
 //  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
 var GameRoot = require("./GameRoot");
-var Helper = (function(){
-        return {
+
+cc.Class({
+    extends: cc.Component,
+
+    properties: {
+
+    },
+
+    // LIFE-CYCLE CALLBACKS:
+
+    // onLoad () {},
+
+    start () {
+
+    },
+    statics: {
+        
         setLoadingDisplay(){
             if(cc.sys.isNative){
                 return;
@@ -48,9 +63,5 @@ var Helper = (function(){
         enterTest(){
             this.loadSceneWithProgress("wuziqi");
         },
-    }
-
-})();
-
-exports.Helper = Helper;
-
+    },
+});
